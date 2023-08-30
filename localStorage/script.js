@@ -24,7 +24,7 @@ function runEvent(e) {
 	e.preventDefault();
 
 	//pobieranie wartości zapisanej w input
-	let task = document.getElementById(`item`).value;
+	let task = document.getElementById('item').value;
 
 	//tworzenie li
 	let li = document.createElement('li');
@@ -45,9 +45,12 @@ function runEvent(e) {
 	//dodawanie do li buttona
 	li.appendChild(button);
 
-	//dodawanie do listy całego elementu
-	itemList.appendChild(li);
+	//dodawanie do listy całego elementu, który ma pobraną nazwę i button
+	itemList.appendChild(li)
+
+
 }
+
 
 //usuwanie elementów
 ///tworzymy funkcję, która pobiera przycisk i i usuwa całą zawartość li
