@@ -118,9 +118,9 @@ function showItems() {
 
 	for (let i = 0; i < itemArray.length; i++) {
 		newItems +=
-			'<li class=list-group-item d-block>' +
+			'<li class="list-group-item d-block lead">' +
 			itemArray[i] +
-			'<button class="btn btn-danger btn-sm float-end delete">X</button>' +
+			'<button class="btn btn-secondary btn-sm float-end delete shadow">X</button>' +
 			'</li>';
 	}
 	itemList.innerHTML = newItems;
