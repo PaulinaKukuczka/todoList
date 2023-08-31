@@ -8,7 +8,7 @@ inputForm.addEventListener('submit', runEvent);
 itemList.addEventListener('click', removeItem);
 //filter
 const filter = document.querySelector('#filter');
-filter.addEventListener('keyup', filterItems);
+filter.addEventListener('keydown', filterItems);
 
 function addName() {
 	//jeśli nie ma imienia, to wysyłamy prośbę o podanie (tworzymy zmienną)
@@ -126,6 +126,7 @@ function showItems() {
 	itemList.innerHTML = newItems;
 }
 showItems()
+
 // filtrowanie danych
 function filterItems(e) {
 	// konwertowanie na mała literę, pobieranie przezz e.target.value
@@ -135,13 +136,13 @@ function filterItems(e) {
 	let itemsFromLi = itemList.getElementsByTagName('li');
 	// console.log(itemsFromLi)
 	//konwertowanie na tablicę
-	Array.from(itemsFromLi).forEach(function (item) {
+	Array.from(itemsFromLi).forEach(function(item) {
 		let itemName = item.firstChild.textContent;
 		// console.log(itemName)
-		if (itemName.toLowerCase().indexOf(text) != -1) {
-			item.style.display = 'block';
+		if(itemName.toLowerCase().indexOf(text) != -1) {
+			item.className = 'list-group-item d-block lead';
 		} else {
-			item.style.display = 'none';
+			item.className = 'list-group-item d-none';
 		}
 	});
 }
