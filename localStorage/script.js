@@ -24,7 +24,7 @@ function runEvent(e) {
 	e.preventDefault();
 
 	//pobieranie wartości zapisanej w input
-	let task = document.getElementById(`item`).value;
+	let item = document.getElementById(`item`).value;
 
 	//tworzenie li
 	let li = document.createElement('li');
@@ -32,7 +32,7 @@ function runEvent(e) {
 	li.className = 'list-group-item d-block';
 
 	//dodawanie do li tekstu z inputa
-	li.appendChild(document.createTextNode(task));
+	li.appendChild(document.createTextNode(item));
 
 	//dodawanie button!
 	//tworzenie buttona
@@ -47,6 +47,9 @@ function runEvent(e) {
 
 	//dodawanie do listy całego elementu
 	itemList.appendChild(li);
+	initItems()
+	addItems()
+	showItems()
 }
 
 //usuwanie elementów
@@ -58,4 +61,52 @@ function removeItem(e) {
 		let li = e.target.parentElement;
 		itemList.removeChild(li);
 	}
+}
+
+
+//zapisywanie w localStorage danych
+//tworzysz bazę z danymi. 
+//1. nadajesz klucz (JSON.parse aby zapisać w postaci tablicy)/ 
+//2. stworzenie pustej tablicy
+//3. wsadzenie wartości do tablicy setItem/ JSON.stringify do ustawienia wartości jako string
+function initItems() {
+	console.log(item.value)
+	
+	//potrzebujemy tablicy, do zachowywania kilku danych
+	//pobieramy klucz!!!
+	let itemList = JSON.parse(window.localStorage.getItem('item'))
+	// console.log(itemList)
+
+	if(itemList == null) {
+		itemList = Array()
+		//ustawiamy wartości w localStorage, zapisujemy ja w stringu, jest zapisywana w array
+		window.localStorage.setItem('item', JSON.stringify(itemList))
+	}
+	console.log(itemList)
+}
+
+function addItems() {
+	//pobieramy wartość z inputa
+	let item = document.getElementById(`item`).value;
+	//pobieramy klucz!!!, jest on w tablicy JSON.parse
+	let itemList = JSON.parse(window.localStorage.getItem('item'))
+	//pojedynczą rzecz wpychamy do itemList (czyli wartości klucza 'item')
+	itemList.push(item)
+	//ustawiamy localStorage: klucz-item = wartość (zmieniona na stringa) listy rzeczy
+	window.localStorage.setItem('item', JSON.stringify(itemList))
+	document.getElementById('item').value = ''
+}
+
+function showItems() {
+	//znów pobieramy wartość
+	let itemList = document.querySelector('#items');
+	//ściagamy całą listę zadań
+	let itemArray = JSON.parse(window.localStorage.getItem('item'))
+	console.log(itemArray)
+let newItems = '';
+
+	for (let i=0; i < itemArray.length; i++) {
+		newItems += '<li class=list-group-item d-block>' + itemArray[i] + '<button class="btn btn-danger btn-sm float-end delete">X</button>' + '</li>'
+	}
+	itemList.innerHTML = newItems;
 }
