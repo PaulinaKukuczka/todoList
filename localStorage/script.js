@@ -103,14 +103,13 @@ function addItems() {
 		document.getElementById('item').value = '';
 		document.getElementById('error').innerHTML = '';
 	} else {
-		document.getElementById('error').innerHTML = 'Please, type something!'
+		document.getElementById('error').innerHTML = 'Please, type something!';
 	}
-
 }
 
 function showItems() {
-	//znów pobieramy wartość
 	let itemList = document.querySelector('#items');
+	//znów pobieramy wartość
 	//ściagamy całą listę zadań
 	let itemArray = JSON.parse(window.localStorage.getItem('item'));
 	console.log(itemArray);
@@ -125,7 +124,7 @@ function showItems() {
 	}
 	itemList.innerHTML = newItems;
 }
-showItems()
+showItems();
 
 // filtrowanie danych
 function filterItems(e) {
@@ -136,10 +135,10 @@ function filterItems(e) {
 	let itemsFromLi = itemList.getElementsByTagName('li');
 	// console.log(itemsFromLi)
 	//konwertowanie na tablicę
-	Array.from(itemsFromLi).forEach(function(item) {
+	Array.from(itemsFromLi).forEach(function (item) {
 		let itemName = item.firstChild.textContent;
 		// console.log(itemName)
-		if(itemName.toLowerCase().indexOf(text) != -1) {
+		if (itemName.toLowerCase().indexOf(text) != -1) {
 			item.className = 'list-group-item d-block lead';
 		} else {
 			item.className = 'list-group-item d-none';
